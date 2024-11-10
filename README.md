@@ -1,6 +1,6 @@
-# More Local Storage
+# More to Store
 
-`More Local Storage` is a simple and fast way to interact with `localStorage` with optional encryption support. It allows developers to store, retrieve, and manage data in `localStorage` securely.
+`More to Store` is a simple and fast way to interact with `localStorage` with optional encryption support. It allows developers to store, retrieve, and manage data in `localStorage` securely.
 
 ## Installation
 
