@@ -7,4 +7,4 @@
 To install the package, run the following command:
 
 
-npm install easy-localstorage
+npm install more-to-store
