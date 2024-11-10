@@ -1,6 +1,6 @@
-# Easy LocalStorage
+# More Local Storage
 
-`Easy LocalStorage` is a simple and fast way to interact with `localStorage` with optional encryption support. It allows developers to store, retrieve, and manage data in `localStorage` securely.
+`More Local Storage` is a simple and fast way to interact with `localStorage` with optional encryption support. It allows developers to store, retrieve, and manage data in `localStorage` securely.
 
 ## Installation
 
