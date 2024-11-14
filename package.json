@@ -1,12 +1,15 @@
 {
   "name": "more-to-store",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "`More to store` is a simple and fast way to interact with `localStorage` with optional encryption support. It allows developers to store, retrieve, and manage data in `localStorage` securely.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": ["localStorage", "encryption", "storage", "web development", "JavaScript"],
+  "author": "Meezan Shaikh",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.2.0"
+  }
 }
