@@ -1,13 +1,32 @@
 const CryptoJS = require('crypto-js');
 
 class MoreToStore {
-  static setItem(key, value, secretKey = '') {
+  static setItem(key, value, secretKey = '', expiryInMs = null) {
     try {
-      let data = JSON.stringify(value);
+      let data = {
+        value: value,
+        expiry: expiryInMs ? Date.now() + expiryInMs : null
+      };
+
+      let stringifiedData = JSON.stringify(data);
+
       if (secretKey) {
-        data = CryptoJS.AES.encrypt(data, secretKey).toString();
+        stringifiedData = CryptoJS.AES.encrypt(stringifiedData, secretKey).toString();
       }
-      localStorage.setItem(key, data);
+
+      localStorage.setItem(key, stringifiedData);
+
+
+      if (expiryInMs) {
+        setTimeout(() => {
+          if (localStorage.getItem(key)) {
+            const storedData = JSON.parse(localStorage.getItem(key));
+            if (storedData.expiry && Date.now() > storedData.expiry) {
+              localStorage.removeItem(key);
+            }
+          }
+        }, expiryInMs);
+      }
     } catch (error) {
       console.error('Error setting item in localStorage', error);
     }
@@ -17,11 +36,23 @@ class MoreToStore {
     try {
       const data = localStorage.getItem(key);
       if (!data) return null;
+
+      let parsedData;
+
       if (secretKey) {
         const bytes = CryptoJS.AES.decrypt(data, secretKey);
-        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        parsedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      } else {
+        parsedData = JSON.parse(data);
       }
-      return JSON.parse(data);
+
+      if (parsedData.expiry && Date.now() > parsedData.expiry) {
+        
+        localStorage.removeItem(key);
+        return null;
+      }
+
+      return parsedData.value;
     } catch (error) {
       console.error('Error getting item from localStorage', error);
       return null;
